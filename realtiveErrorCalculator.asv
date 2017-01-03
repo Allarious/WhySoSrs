@@ -1,0 +1,80 @@
+function [err]= relativeErrorCalculator(equation)
+
+[firstOperand, secondOperand, operator] = breakIntoOperands(equation);
+
+switch firstOperand
+    case 'a'
+        err = 'E(a)';
+        errFirstOperand = 'E(a)';
+    case 'b'
+        err = 'E(b)';
+        errFirstOperand = 'E(b)';
+    case 'c'
+        err = 'E(c)';
+        errFirstOperand = 'E(c)';
+    case 'd'
+        err = 'E(d)';
+        errFirstOperand = 'E(d)';
+    case 'e'
+        err = 'E(e)';
+        errFirstOperand = 'E(e)';
+    case 'f'
+        err = 'E(f)';
+        errFirstOperand = 'E(f)';
+    otherwise
+        [errFirstOperand] = absoluteErrorCalculator(firstOperand);
+    
+end
+switch secondOperand
+    case 'a'
+        err = 'E(a)';
+        errSecondOperand = 'E(a)';
+    case 'b'
+        err = 'E(b)';
+        errSecondOperand = 'E(b)';
+    case 'c'
+        err = 'E(c)';
+        errSecondOperand = 'E(c)';
+    case 'd'
+        err = 'E(d)';
+        errSecondOperand = 'E(d)';
+    case 'e'
+        err = 'E(e)';
+        errSecondOperand = 'E(e)';
+    case 'f'
+        err = 'E(f)';
+        errSecondOperand = 'E(f)';
+    otherwise
+        [errSecondOperand] = absoluteErrorCalculator(secondOperand);
+    
+end
+
+%disp(errSecondOperand)
+%disp(errFirstOperand)
+disp([firstOperand ' = ' errFirstOperand])
+disp([secondOperand ' = ' errSecondOperand])
+if(operator == '+')
+    
+    err = strcat('(', errFirstOperand,' + ',errSecondOperand, ')') ;
+    
+elseif(operator == '-')
+    
+    err = strcat('(', errFirstOperand,' + ',errSecondOperand, ')') ;
+    
+elseif(operator == '/')
+    
+    err = strcat('(|', firstOperand, '| * ', errSecondOperand, ' + |', secondOperand, '| * ',  errFirstOperand, ') / (', secondOperand, ' ^ 2 )');
+    
+    
+elseif(operator == '^')
+    
+    err = strcat('(', firstOperand, ' ^ ', secondOperand, ') * (', errSecondOperand, ' * ln(', firstOperand, ') + (', errFirstOperand, ' * ', secondOperand, ' / ', firstOperand, '))' );
+    
+elseif(operator == '*')
+    
+    err = strcat('(|',firstOperand, '| * ' , errSecondOperand, ' + |',secondOperand, '| * ', errFirstOperand, ')');
+    
+end
+    
+    
+end
